@@ -9,16 +9,15 @@ import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.media.InputMedia;
 import org.telegram.telegrambots.meta.api.objects.media.InputMediaPhoto;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 
 import java.io.File;
-import java.text.MessageFormat;
 import java.util.*;
-
-import static java.lang.String.format;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -45,7 +44,7 @@ public class Bot extends TelegramLongPollingBot {
             case "\uD83D\uDD6FСвободные эскизы\uD83D\uDD6F":
                 sendSketches(chatId);
             case "⛓Запись на сеанс⛓":
-                sendPhotoWithCaption(chatId, "Если хочешь записаться на сеанс или предложить идеи для создания своего собственного эскиза, то напиши мне @Nek216.", "E:\\IdeaProjects\\telegramBot\\src\\main\\resources\\recording.jpg");
+                sendPhotoWithCaption(chatId, "Если хочешь записаться на сеанс или предложить идеи для создания своего собственного эскиза, то напиши [мне](https://t.me/Nektagram/).\nА вот мой [инстаграм](https://www.instagram.com/n3ktagram/).", "E:\\IdeaProjects\\telegramBot\\src\\main\\resources\\recording.jpg");
                 break;
             default:
         }
@@ -69,6 +68,16 @@ public class Bot extends TelegramLongPollingBot {
         replyKeyboardMarkup.setKeyboard(keyboard);
         return replyKeyboardMarkup;
     }
+
+    /*public InlineKeyboardMarkup getInlineKeyboardMarkup() {
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
+        List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
+        keyboardButtonsRow.add(new InlineKeyboardButton().setText("Конечно хочу").setCallbackData("ofCourse"));
+        rowList.add(keyboardButtonsRow);
+        inlineKeyboardMarkup.setKeyboard(rowList);
+        return inlineKeyboardMarkup;
+    }*/
 
     @SneakyThrows
     public void sendPortfolio(Long chatId) {
@@ -128,8 +137,8 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     @SneakyThrows
-    public void sendPhotoWithCaptionWithMenu(Long chatId, String imageCaption, String imagePath) {
-        File image = new File(imagePath);
+    public void sendPhotoWithCaptionWithMenu(Long chatId, String imageCaption, String path) {
+        File image = new File(path);
         SendPhoto sendPhoto = new SendPhoto();
         sendPhoto.setPhoto(image);
         sendPhoto.setChatId(chatId);
@@ -139,11 +148,12 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     @SneakyThrows
-    public void sendPhotoWithCaption(Long chatId, String imageCaption, String imagePath) {
-        File image = new File(imagePath);
+    public void sendPhotoWithCaption(Long chatId, String imageCaption, String path) {
+        File image = new File(path);
         SendPhoto sendPhoto = new SendPhoto();
         sendPhoto.setPhoto(image);
         sendPhoto.setChatId(chatId);
+        sendPhoto.setParseMode("Markdown");
         sendPhoto.setCaption(imageCaption);
         execute(sendPhoto);
     }
