@@ -1,31 +1,24 @@
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class PingTask {
-    public static void main(String[] args) throws IOException {
-        while (true) {
-            String status = getStatus("https://google.com");
-            System.out.println(status);
-        }
-    }
-
-    public static String getStatus(String url) throws IOException {
-        String result = "";
-        try {
-            URL urlObj = new URL(url);
-            HttpURLConnection connection = (HttpURLConnection) urlObj.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setConnectTimeout(100);
-            connection.connect();
-
-            int code = connection.getResponseCode();
-            if (code == 200) {
-                result = "On";
+    public static void main(String[] args) {
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    URL urlObj = new URL("https://google.com");
+                    HttpURLConnection connection = (HttpURLConnection) urlObj.openConnection();
+                    connection.connect();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-        } catch (Exception e) {
-            result = "Off";
-        }
-        return result;
+        };
+        Timer timer = new Timer("timer");
+        timer.schedule(timerTask, 1200, 1200000);
     }
 }
