@@ -5,7 +5,7 @@ public class App {
     public static void main(String[] args) {
         BasicConfigurator.configure();
         ApiContextInitializer.init();
-        Bot bot = new Bot("@SHAININKCORE_bot", "5057834757:AAEvJb-2TTa8Nwom6L693VVMcE3rWFWQPmw");
+        Bot bot = new Bot("@AuthorTattooNekta_bot", "5024373472:AAG1FumRgVcbgQ9dCUIMgGuhtTzQxltYfK8");
         bot.botConnect();
     }
 }

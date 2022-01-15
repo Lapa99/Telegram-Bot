@@ -3,7 +3,8 @@ import com.vdurmont.emoji.EmojiParser;
 public enum Emojis {
     CANDLE(":candle:"),
     FLEUR(":fleur_de_lis:"),
-    CHAINS(":chains:");
+    CHAINS(":chains:"),
+    EYE(":eye_in_speech_bubble:");
 
 
     private String value;

@@ -16,7 +16,7 @@ public class PingTask {
             URL urlObj = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) urlObj.openConnection();
             connection.setRequestMethod("GET");
-            connection.setConnectTimeout(150000);
+            connection.setConnectTimeout(100);
             connection.connect();
 
             int code = connection.getResponseCode();
