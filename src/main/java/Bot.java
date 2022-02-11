@@ -34,23 +34,28 @@ public class Bot extends TelegramLongPollingBot {
         log.debug("Receive new Update. updateID: " + update.getUpdateId());
         Long chatId = update.getMessage().getChatId();
         String inputText = update.getMessage().getText();
-        switch (inputText) {
-            case "/start":
-                sendCaptionWithMenu(chatId);
-                break;
-            case "⚜Портфолио":
-                sendPortfolioAndSketches(chatId, "E:\\IdeaProjects\\telegramBot\\src\\main\\resources\\Uill.mp4", "Больше работ >>>", "https://t.me/+mstMzKeuFzQ0MmNi");
-                break;
-            case "\uD83D\uDD6FСвободные эскизы":
-                sendPortfolioAndSketches(chatId, "E:\\IdeaProjects\\telegramBot\\src\\main\\resources\\Uill.mp4", "Больше эскизов >>>", "https://t.me/sketchtattooNekta");
-                break;
-            case "⛓Запись на сеанс":
-                sendPhotoWithCaption(chatId);
-                break;
-            case "\uD83D\uDC41\u200D\uD83D\uDDE8Обо мне":
-                aboutMe(chatId);
-                break;
-            default:
+        if (update.hasMessage()) {
+            switch (inputText) {
+                case "/start":
+                    sendCaptionWithMenu(chatId);
+                    break;
+                case "⚜Портфолио":
+                case "/portfolio":
+                    sendPortfolioAndSketches(chatId, "E:\\IdeaProjects\\telegramBot\\src\\main\\resources\\v1.mp4", "Больше работ >>>", "https://t.me/+mstMzKeuFzQ0MmNi");
+                    break;
+                case "\uD83D\uDD6FСвободные эскизы":
+                case "/sketches":
+                    sendPortfolioAndSketches(chatId, "E:\\IdeaProjects\\telegramBot\\src\\main\\resources\\v2.mp4", "Больше эскизов >>>", "https://t.me/sketchtattooNekta");
+                    break;
+                case "⛓Запись на сеанс":
+                case "/recording":
+                    sendPhotoWithCaption(chatId);
+                    break;
+                case "\uD83D\uDC41\u200D\uD83D\uDDE8Обо мне":
+                case "/aboutme":
+                    aboutMe(chatId);
+                    break;
+            }
         }
     }
 
@@ -69,6 +74,7 @@ public class Bot extends TelegramLongPollingBot {
         keyboard.add(row1);
         keyboard.add(row2);
         replyKeyboardMarkup.setKeyboard(keyboard);
+        replyKeyboardMarkup.setOneTimeKeyboard(true);
         return replyKeyboardMarkup;
     }
 
@@ -120,7 +126,6 @@ public class Bot extends TelegramLongPollingBot {
         SendPhoto sendPhoto = new SendPhoto();
         sendPhoto.setPhoto(image);
         sendPhoto.setChatId(chatId);
-        sendPhoto.setParseMode("Markdown");
         sendPhoto.setCaption("Если хочешь записаться на сеанс или предложить идеи для создания своего собственного эскиза, то напиши мне");
         sendPhoto.setReplyMarkup(getSecondInlineKeyboardMarkup());
         execute(sendPhoto);
@@ -129,7 +134,9 @@ public class Bot extends TelegramLongPollingBot {
     @SneakyThrows
     private void aboutMe(Long chatId) {
         SendMessage message = new SendMessage();
-        message.setText("Меня зовут Максим, я живу в Санкт-Петербурге и занимаюсь татуировкой 6 лет, профессионально — 3 года.");
+        message.setText("Приветствует Некта, мне 24. Последние 8 лет я зарабатываю татуировкой. После перерыва, последние пару лет работаю на профессиональном уровне.\n" +
+                        "Я не привязан к одному стилю, но можно определить несколько основных направлений - графика, орнаметал, абстракт.\n" +
+                        "Но зачем нам границы, художественная татуировка вышла на новый уровень и я всегда открыт для кооперации с ваши идеями.");
         message.setChatId(chatId);
         execute(message);
     }
