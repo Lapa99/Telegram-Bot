@@ -41,11 +41,11 @@ public class Bot extends TelegramLongPollingBot {
                     break;
                 case "⚜Портфолио":
                 case "/portfolio":
-                    sendPortfolioAndSketches(chatId, "E:\\IdeaProjects\\telegramBot\\src\\main\\resources\\v1.mp4", "Больше работ >>>", "https://t.me/+mstMzKeuFzQ0MmNi");
+                    sendPortfolioAndSketches(chatId, "home\\user\\Desktop\\telegramBot\\v1.mp4", "Больше работ >>>", "https://t.me/+mstMzKeuFzQ0MmNi");
                     break;
                 case "\uD83D\uDD6FСвободные эскизы":
                 case "/sketches":
-                    sendPortfolioAndSketches(chatId, "E:\\IdeaProjects\\telegramBot\\src\\main\\resources\\v2.mp4", "Больше эскизов >>>", "https://t.me/sketchtattooNekta");
+                    sendPortfolioAndSketches(chatId, "home\\user\\Desktop\\telegramBot\\v2.mp4", "Больше эскизов >>>", "https://t.me/sketchtattooNekta");
                     break;
                 case "⛓Запись на сеанс":
                 case "/recording":
@@ -111,7 +111,7 @@ public class Bot extends TelegramLongPollingBot {
 
     @SneakyThrows
     public void sendCaptionWithMenu(Long chatId) {
-        File gif = new File("E:\\IdeaProjects\\telegramBot\\src\\main\\resources\\Uill.mp4");
+        File gif = new File("home\\user\\Desktop\\telegramBot\\Uill.mp4");
         SendVideo sendVideo = new SendVideo();
         sendVideo.setVideo(gif);
         sendVideo.setChatId(chatId);
@@ -122,7 +122,7 @@ public class Bot extends TelegramLongPollingBot {
 
     @SneakyThrows
     public void sendPhotoWithCaption(Long chatId) {
-        File image = new File("E:\\IdeaProjects\\telegramBot\\src\\main\\resources\\recording.jpg");
+        File image = new File("home\\user\\Desktop\\telegramBot\\recording.jpg");
         SendPhoto sendPhoto = new SendPhoto();
         sendPhoto.setPhoto(image);
         sendPhoto.setChatId(chatId);
@@ -134,9 +134,13 @@ public class Bot extends TelegramLongPollingBot {
     @SneakyThrows
     private void aboutMe(Long chatId) {
         SendMessage message = new SendMessage();
-        message.setText("Приветствует Некта, мне 24. Последние 8 лет я зарабатываю татуировкой. После перерыва, последние пару лет работаю на профессиональном уровне.\n" +
-                        "Я не привязан к одному стилю, но можно определить несколько основных направлений - графика, орнаметал, абстракт.\n" +
-                        "Но зачем нам границы, художественная татуировка вышла на новый уровень и я всегда открыт для кооперации с ваши идеями.");
+        message.setText("Приветствует N.\n" +
+                "Тату артист, художник работающим под ником Некта последние пару лет. А это мой авторский бот. Здесь ты можешь напрямую заценить в лучшем качестве мой Арт, тату портфолио за последние пару лет или записаться на сеанс. \n" +
+                "\n" +
+                "В татуировке я не привязан к одному стилю, но можно определить несколько основных направлений - графика, орнаметал, абстракт.\n" +
+                "Но зачем нам границы, художественная татуировка вышла на новый уровень и я всегда открыт для кооперации с вашими идеями. \n" +
+                "\n" +
+                "это все мелочи, дальше больше!");
         message.setChatId(chatId);
         execute(message);
     }
