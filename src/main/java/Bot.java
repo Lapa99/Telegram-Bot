@@ -37,15 +37,15 @@ public class Bot extends TelegramLongPollingBot {
         if (update.hasMessage()) {
             switch (inputText) {
                 case "/start":
-                    sendCaptionWithMenu(chatId);
+                    sendMenu(chatId);
                     break;
                 case "⚜Портфолио":
                 case "/portfolio":
-                    sendPortfolioAndSketches(chatId, "home\\user\\Desktop\\telegramBot\\v1.mp4", "Больше работ >>>", "https://t.me/+mstMzKeuFzQ0MmNi");
+                    sendPortfolioAndSketches(chatId, "C:\\telegramBot\\src\\main\\resources\\v1.mp4", "Больше работ >>>", "https://t.me/+mstMzKeuFzQ0MmNi");
                     break;
                 case "\uD83D\uDD6FСвободные эскизы":
                 case "/sketches":
-                    sendPortfolioAndSketches(chatId, "home\\user\\Desktop\\telegramBot\\v2.mp4", "Больше эскизов >>>", "https://t.me/sketchtattooNekta");
+                    sendPortfolioAndSketches(chatId, "C:\\telegramBot\\src\\main\\resources\\v2.mp4", "Больше эскизов >>>", "https://t.me/sketchtattooNekta");
                     break;
                 case "⛓Запись на сеанс":
                 case "/recording":
@@ -67,10 +67,10 @@ public class Bot extends TelegramLongPollingBot {
         List<KeyboardRow> keyboard = new ArrayList<>();
         KeyboardRow row1 = new KeyboardRow();
         KeyboardRow row2 = new KeyboardRow();
-        row1.add(new KeyboardButton(Emojis.FLEUR.get() + "Портфолио"));
-        row1.add(new KeyboardButton(Emojis.CANDLE.get() + "Свободные эскизы"));
-        row2.add(new KeyboardButton(Emojis.CHAINS.get() + "Запись на сеанс"));
-        row2.add(new KeyboardButton(Emojis.EYE.get() + "Обо мне"));
+        row1.add(new KeyboardButton(Emojis.EYE.get() + "Обо мне"));
+        row1.add(new KeyboardButton(Emojis.CANDLE.get() + "Портфолио"));
+        row2.add(new KeyboardButton(Emojis.CHAINS.get() + "Свободные эскизы"));
+        row2.add(new KeyboardButton(Emojis.FLEUR.get() + "Запись на сеанс"));
         keyboard.add(row1);
         keyboard.add(row2);
         replyKeyboardMarkup.setKeyboard(keyboard);
@@ -110,19 +110,17 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     @SneakyThrows
-    public void sendCaptionWithMenu(Long chatId) {
-        File gif = new File("home\\user\\Desktop\\telegramBot\\Uill.mp4");
-        SendVideo sendVideo = new SendVideo();
-        sendVideo.setVideo(gif);
-        sendVideo.setChatId(chatId);
-        sendVideo.setCaption("Приветствую тебя, я Тату-Бот \uD83E\uDD16 Не хочешь татуировку в уникальном стиле?");
-        sendVideo.setReplyMarkup(getReplayKeyBoardMarkup());
-        execute(sendVideo);
+    public void sendMenu(Long chatId) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(chatId);
+        sendMessage.setText("Смотри");
+        sendMessage.setReplyMarkup(getReplayKeyBoardMarkup());
+        execute(sendMessage);
     }
 
     @SneakyThrows
     public void sendPhotoWithCaption(Long chatId) {
-        File image = new File("home\\user\\Desktop\\telegramBot\\recording.jpg");
+        File image = new File("C:\\telegramBot\\src\\main\\resources\\recording.jpg");
         SendPhoto sendPhoto = new SendPhoto();
         sendPhoto.setPhoto(image);
         sendPhoto.setChatId(chatId);
