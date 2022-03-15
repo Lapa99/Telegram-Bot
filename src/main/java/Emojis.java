@@ -4,7 +4,8 @@ public enum Emojis {
     CANDLE(":candle:"),
     FLEUR(":fleur_de_lis:"),
     CHAINS(":chains:"),
-    EYE(":eye_in_speech_bubble:");
+    EYE(":eye_in_speech_bubble:"),
+    SCULL(":skeleton:");
 
 
     private String value;

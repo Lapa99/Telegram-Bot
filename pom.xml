@@ -73,6 +73,7 @@
             <artifactId>emoji-java</artifactId>
             <version>5.1.1</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.github.pengrad/java-telegram-bot-api -->
 
     </dependencies>
 

@@ -7,6 +7,7 @@ import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.send.SendVideo;
+
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
@@ -39,19 +40,19 @@ public class Bot extends TelegramLongPollingBot {
                 case "/start":
                     sendMenu(chatId);
                     break;
-                case "⚜Портфолио":
+                case "\uD83D\uDD6FPortfolio":
                 case "/portfolio":
-                    sendPortfolioAndSketches(chatId, "C:\\telegramBot\\src\\main\\resources\\v1.mp4", "Больше работ >>>", "https://t.me/+mstMzKeuFzQ0MmNi");
+                    sendPortfolioAndSketches(chatId, "E:\\IdeaProjects\\telegramBot\\src\\main\\resources\\v1.mp4", "More works >>>", "https://t.me/+mstMzKeuFzQ0MmNi");
                     break;
-                case "\uD83D\uDD6FСвободные эскизы":
+                case "⛓Free sketches":
                 case "/sketches":
-                    sendPortfolioAndSketches(chatId, "C:\\telegramBot\\src\\main\\resources\\v2.mp4", "Больше эскизов >>>", "https://t.me/sketchtattooNekta");
+                    sendPortfolioAndSketches(chatId, "E:\\IdeaProjects\\telegramBot\\src\\main\\resources\\v1.mp4", "More sketches >>>", "https://t.me/sketchtattooNekta");
                     break;
-                case "⛓Запись на сеанс":
+                case "⛓Sign up for a session":
                 case "/recording":
                     sendPhotoWithCaption(chatId);
                     break;
-                case "\uD83D\uDC41\u200D\uD83D\uDDE8Обо мне":
+                case "\uD83D\uDC41\u200D\uD83D\uDDE8About me":
                 case "/aboutme":
                     aboutMe(chatId);
                     break;
@@ -67,10 +68,11 @@ public class Bot extends TelegramLongPollingBot {
         List<KeyboardRow> keyboard = new ArrayList<>();
         KeyboardRow row1 = new KeyboardRow();
         KeyboardRow row2 = new KeyboardRow();
-        row1.add(new KeyboardButton(Emojis.EYE.get() + "Обо мне"));
-        row1.add(new KeyboardButton(Emojis.CANDLE.get() + "Портфолио"));
-        row2.add(new KeyboardButton(Emojis.CHAINS.get() + "Свободные эскизы"));
-        row2.add(new KeyboardButton(Emojis.FLEUR.get() + "Запись на сеанс"));
+        KeyboardRow row3 = new KeyboardRow();
+        row1.add(new KeyboardButton(Emojis.EYE.get() + "About me"));
+        row1.add(new KeyboardButton(Emojis.CANDLE.get() + "Portfolio"));
+        row2.add(new KeyboardButton(Emojis.CHAINS.get() + "Free sketches"));
+        row2.add(new KeyboardButton(Emojis.FLEUR.get() + "Sign up for a session"));
         keyboard.add(row1);
         keyboard.add(row2);
         replyKeyboardMarkup.setKeyboard(keyboard);
@@ -92,8 +94,8 @@ public class Bot extends TelegramLongPollingBot {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
         List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
-        keyboardButtonsRow.add(new InlineKeyboardButton().setText("Инстаграм").setUrl("https://www.instagram.com/n3ktagram/"));
-        keyboardButtonsRow.add(new InlineKeyboardButton().setText("Телеграм").setUrl("https://t.me/Nektagram"));
+        keyboardButtonsRow.add(new InlineKeyboardButton().setText("Instagram").setUrl("https://www.instagram.com/n3ktagram/"));
+        keyboardButtonsRow.add(new InlineKeyboardButton().setText("Telegram").setUrl("https://t.me/Nektabrat"));
         rowList.add(keyboardButtonsRow);
         inlineKeyboardMarkup.setKeyboard(rowList);
         return inlineKeyboardMarkup;
@@ -113,18 +115,18 @@ public class Bot extends TelegramLongPollingBot {
     public void sendMenu(Long chatId) {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
-        sendMessage.setText("Смотри");
+        sendMessage.setText("Look");
         sendMessage.setReplyMarkup(getReplayKeyBoardMarkup());
         execute(sendMessage);
     }
 
     @SneakyThrows
     public void sendPhotoWithCaption(Long chatId) {
-        File image = new File("C:\\telegramBot\\src\\main\\resources\\recording.jpg");
+        File image = new File("E:\\IdeaProjects\\telegramBot\\src\\main\\resources\\recording.jpg");
         SendPhoto sendPhoto = new SendPhoto();
         sendPhoto.setPhoto(image);
         sendPhoto.setChatId(chatId);
-        sendPhoto.setCaption("Если хочешь записаться на сеанс или предложить идеи для создания своего собственного эскиза, то напиши мне");
+        sendPhoto.setCaption("If you would like to book a session or suggest ideas for creating your own sketch, please email me.");
         sendPhoto.setReplyMarkup(getSecondInlineKeyboardMarkup());
         execute(sendPhoto);
     }
@@ -132,13 +134,11 @@ public class Bot extends TelegramLongPollingBot {
     @SneakyThrows
     private void aboutMe(Long chatId) {
         SendMessage message = new SendMessage();
-        message.setText("Приветствует N.\n" +
-                "Тату артист, художник работающим под ником Некта последние пару лет. А это мой авторский бот. Здесь ты можешь напрямую заценить в лучшем качестве мой Арт, тату портфолио за последние пару лет или записаться на сеанс. \n" +
-                "\n" +
-                "В татуировке я не привязан к одному стилю, но можно определить несколько основных направлений - графика, орнаметал, абстракт.\n" +
-                "Но зачем нам границы, художественная татуировка вышла на новый уровень и я всегда открыт для кооперации с вашими идеями. \n" +
-                "\n" +
-                "это все мелочи, дальше больше!");
+        message.setText("Greetings N.\n" +
+                "Tattoo artist, an artist who has been working under the nickname Nekta for the last couple of years. And this is my author's bot. Here you can immediately check out in the best quality my Art, tattoo portfolio for the last couple of years or sit down for a session.\n" +
+                "In tattooing, I do not show myself to one style, but several main directions can be identified - graphics, ornamental, abstract.\n" +
+                "But why do we need borders, art tattoo has reached a new level and I'm always open for cooperation with your ideas.\n" +
+                "It's all the little things, more to come!");
         message.setChatId(chatId);
         execute(message);
     }
